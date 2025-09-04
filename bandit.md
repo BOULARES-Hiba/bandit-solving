@@ -13,6 +13,11 @@ This repository contains a comprehensive walkthrough for solving the Bandit warg
   - [Level 4 → 5](#level-4--5)  
   - [Level 5 → 6](#level-5--6)  
   - [Level 6 → 7](#level-6--7) 
+  - [Level 7 → 8](#level-7--8)
+  - [Level 8 → 9](#level-8--9)
+  - [Level 9 → 10](#level-9--10)
+  - [Level 10 → 11](#level-10--11)
+
 
 ## Overview
 
@@ -125,3 +130,52 @@ cat /var/lib/dpkg/info/bandit7.password
 **Solution:** This search spans the entire filesystem (`/`) looking for files owned by user `bandit7` and group `bandit6` that are exactly 33 bytes. The `2>/dev/null` redirects error messages to prevent permission denied errors from cluttering the output.
 
 **Password:** `morbNTDkSW6jIlUc0ymOdMaLnOlFVAaj`
+
+
+### Level 7 → 8
+
+**Objective:** The password is stored in `data.txt` next to the word `"millionth"`.
+
+**Commands:**
+```bash
+grep "millionth" data.txt
+```
+
+**Solution:** The `grep` command searches for text patterns within files. This command locates the line containing "millionth" and displays the entire line, which includes the password adjacent to the search term.
+
+**Password:** `dfwvzFQi4mU0wfNbFOe9RoWskMLg7eEc`
+
+
+### Level 8 → 9
+
+**Objective:** The password is stored in data.txt and is the only line of text that occurs only once.
+**Commands:**
+```bash
+ data.txt | uniq -u
+```
+**Solution:** The `sort` command arranges all lines alphabetically, then pipes the output to uniq -u, which displays only unique lines that appear exactly once. This combination identifies the single non-duplicate line containing the password.
+
+**Password:**  `4CKMh1JI91bUIZZPXDqGanal4xvAg0JM`
+
+
+###Level 9 → 10
+
+**Objective:** The password is stored in data.txt in one of the few human-readable strings, preceded by several '=' characters.
+**Commands:**
+```bash 
+strings data.txt | grep "===="
+```
+**Solution:** The `strings` command extracts printable character sequences from binary files. The output is piped to grep to filter for lines containing multiple equal signs, which helps identify the password among the human-readable strings.
+
+**Password:** `FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey`
+
+###Level 10 → 11
+
+**Objective:**  The password is stored in data.txt, which contains base64 encoded data.
+**Commands:**
+```bash 
+base64 -d data.txt
+```
+**Solution:**  The `base64` command with the -d flag decodes base64-encoded content back to its original form. This reveals the plaintext password that was encoded in the data.txt file.
+
+**Password:** `dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr`
