@@ -158,7 +158,7 @@ grep "millionth" data.txt
 **Password:**  `4CKMh1JI91bUIZZPXDqGanal4xvAg0JM`
 
 
-###Level 9 → 10
+### Level 9 → 10
 
 **Objective:** The password is stored in data.txt in one of the few human-readable strings, preceded by several '=' characters.
 **Commands:**
@@ -169,7 +169,7 @@ strings data.txt | grep "===="
 
 **Password:** `FGUW5ilLVJrxX9kMYMmlN4MgbpfMiqey`
 
-###Level 10 → 11
+### Level 10 → 11
 
 **Objective:**  The password is stored in data.txt, which contains base64 encoded data.
 **Commands:**
@@ -179,3 +179,16 @@ base64 -d data.txt
 **Solution:**  The `base64` command with the -d flag decodes base64-encoded content back to its original form. This reveals the plaintext password that was encoded in the data.txt file.
 
 **Password:** `dtR173fZKb0RRsDFSGsg2RWnpNVj3qRr`
+
+### Level 11 → 12
+
+**Objective:** The password for the next level is stored in the file data.txt, where all lowercase (a–z) and uppercase (A–Z) letters have been rotated by 13 positions (ROT13).
+
+**Commands:**
+```bash 
+cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+
+```
+**Solution:**  The `tr` command translates characters. The sets 'A-Za-z' and 'N-ZA-Mn-za-m' shift each letter by 13 positions, effectively decoding ROT13. This reveals the plaintext password.
+
+**Password:** `7x16WNeHIi5YkIhWsfFIqoognUTyj9Q4`
